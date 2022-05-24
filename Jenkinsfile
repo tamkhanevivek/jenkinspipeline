@@ -17,6 +17,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                                 echo "stage 1: using project: ${openshift.project()} in cluster ${openshift.cluster()}"
+                                echo "Hello from Labuser13"
                         }
                     }
                 }
