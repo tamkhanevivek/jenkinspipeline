@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: d5task
+  name: d5task
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: d5task
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: d5task
+    spec:
+      containers:
+      - image: quay.io/mayank123modi/mayanknginximage
+        name: mayanknginximage
+        resources: {}
+status: {}
