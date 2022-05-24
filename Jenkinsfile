@@ -30,7 +30,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                               sh 'oc create -f d5Deployment.yaml' 
+                               sh 'oc create -f day5Deployment.yaml' 
                         }
                     }
                 }
