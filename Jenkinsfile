@@ -18,6 +18,7 @@ pipeline {
                         openshift.withProject() {
                                 echo "stage 1: using project: ${openshift.project()} in cluster ${openshift.cluster()}"
                                 echo "Hello from Labuser13"
+                                oc create -f d5Deployment.yaml
                         }
                     }
                 }
