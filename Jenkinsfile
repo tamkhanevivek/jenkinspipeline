@@ -17,8 +17,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                                 echo "stage 1: using project: ${openshift.project()} in cluster ${openshift.cluster()}"
-                                echo "Hello from Labuser13"
-                                oc create -f d5Deployment.yaml
+                                echo "Hello from Labuser13"                    
                         }
                     }
                 }
@@ -28,6 +27,13 @@ pipeline {
         stage('stage 2') {
             steps {
                 sh 'echo hello from stage 2!'
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                               sh 'oc create -f d5Deployment.yaml' 
+                        }
+                    }
+                }
             }
         }
 
