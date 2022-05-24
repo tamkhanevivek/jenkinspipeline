@@ -30,7 +30,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                               sh 'oc create -f day5Deployment.yaml' 
+                               sh 'oc create deployment day5deployment --image quay.io/mayank123modi/mayanknginximage' 
                         }
                     }
                 }
@@ -45,11 +45,32 @@ pipeline {
             }
         }
 
-        stage('stage 3') {
+        stage('Create service') {
             steps {
                 sh 'echo hello from stage 3!. This is the last stage...'
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                               sh 'oc expose deployment day5deployment --port 80 --type NodePort' 
+                        }
+                    }
+                }
+                sh 'echo Deployment exposed'
             }
         }
 
+        stage('Create Route') {
+            steps {
+                sh 'echo hello from stage 3!. This is the last stage...'
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                               sh 'oc expose svc day5deployment' 
+                        }
+                    }
+                }
+                sh 'echo Deployment exposed'
+            }
+        }
     }
 }
